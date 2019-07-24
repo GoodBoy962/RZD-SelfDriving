@@ -50,7 +50,6 @@ def random_colors(N):
     return colors
 
 
-
 colors = random_colors(len(class_names))
 class_dict = {
     name: color for name, color in zip(class_names, colors)
@@ -79,8 +78,7 @@ def display_instances(image, boxes, masks, ids, names, scores):
     else:
         assert boxes.shape[0] == masks.shape[-1] == ids.shape[0]
 
-
-    for i, color in enumerate(colors):
+    for i in range(n_instances):
         if not np.any(boxes[i]):
             continue
 
