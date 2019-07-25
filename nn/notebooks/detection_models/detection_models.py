@@ -9,12 +9,10 @@ import matplotlib.pyplot as plt
 import cv2
 import imageai
 from imageai.Detection import VideoObjectDetection
+import os
 
 
-
-
-def detect_with_mrcnn(path_to_weights="mask_rcnn_coco.h5", switch_to_HD_camera=False):
-
+def detect_with_mrcnn():
 
     # Root directory of the project
     ROOT_DIR = os.path.abspath("../")
@@ -32,14 +30,13 @@ def detect_with_mrcnn(path_to_weights="mask_rcnn_coco.h5", switch_to_HD_camera=F
     MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
     # Local path to trained weights file
-    COCO_MODEL_PATH = os.path.join(ROOT_DIR, path_to_weights)
+    COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
     # Download COCO trained weights from Releases if needed
     if not os.path.exists(COCO_MODEL_PATH):
         utils.download_trained_weights(COCO_MODEL_PATH)
 
     # Directory of images to run detection on
     IMAGE_DIR = os.path.join(ROOT_DIR, "images")
-
 
     class InferenceConfig(coco.CocoConfig):
         GPU_COUNT = 1
@@ -67,7 +64,6 @@ def detect_with_mrcnn(path_to_weights="mask_rcnn_coco.h5", switch_to_HD_camera=F
         'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
         'teddy bear', 'hair drier', 'toothbrush'
     ]
-
 
 
     def random_colors(N):
@@ -120,10 +116,9 @@ def detect_with_mrcnn(path_to_weights="mask_rcnn_coco.h5", switch_to_HD_camera=F
         
     capture = cv2.VideoCapture(0)
 
-    if switch_to_HD_camera:
-        # these 2 lines can be removed if you dont have a 1080p camera.
-        capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-        capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    # these 2 lines can be removed if you dont have a 1080p camera.
+    #capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    #capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
     while True:
         ret, frame = capture.read()
@@ -141,7 +136,11 @@ def detect_with_mrcnn(path_to_weights="mask_rcnn_coco.h5", switch_to_HD_camera=F
 
 
 
-def detect_with_yolov3(path_to_weights="weights/yolo.h5"):
+
+
+
+
+def detect_with_yolov3():
 
     """
     <-- CODE IF YOU NEED TO LOAD SOME VIDEO -->
@@ -162,7 +161,7 @@ def detect_with_yolov3(path_to_weights="weights/yolo.h5"):
     camera = cv2.VideoCapture(0)
     detector = VideoObjectDetection()
     detector.setModelTypeAsYOLOv3()
-    detector.setModelPath(os.path.join(execution_path, path_to_weights))
+    detector.setModelPath(os.path.join(execution_path, "weights/yolo.h5"))
     detector.loadModel()
 
 
@@ -174,14 +173,13 @@ def detect_with_yolov3(path_to_weights="weights/yolo.h5"):
 
 
 
-def detect_with_yolotiny(path_to_weights="weights/yolo_tiny.h5"):
-
-
+def detect_with_yolotiny():
+    
     execution_path = os.getcwd()
     camera = cv2.VideoCapture(0)
     detector = VideoObjectDetection()
     detector.setModelTypeAsTinyYOLOv3()
-    detector.setModelPath(os.path.join(execution_path, path_to_weights))
+    detector.setModelPath(os.path.join(execution_path, "weights/yolo_tiny.h5"))
     detector.loadModel()
 
 
@@ -194,14 +192,13 @@ def detect_with_yolotiny(path_to_weights="weights/yolo_tiny.h5"):
 
 
 
-def detect_with_retinanet(path_to_weights="weights/resnet50_coco_best_v2.0.1.h5"):
-
-
+def detect_with_retinanet():
+    
     execution_path = os.getcwd()
     camera = cv2.VideoCapture(0)
     detector = VideoObjectDetection()
     detector.setModelTypeAsRetinaNet()
-    detector.setModelPath(os.path.join(execution_path, path_to_weights))
+    detector.setModelPath(os.path.join(execution_path, "weights/resnet50_coco_best_v2.0.1.h5"))
     detector.loadModel()
 
 
