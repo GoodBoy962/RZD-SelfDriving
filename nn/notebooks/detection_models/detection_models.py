@@ -193,7 +193,17 @@ def detect_with_yolotiny():
 
 
 def detect_with_retinanet():
+
     
+    def forFrame(frame_number, output_array, output_count):
+        """Детекция bounding box'ов"""
+
+        print("ДЛЯ КАДРА " , frame_number)
+        print("Координаты объекта: ", output_array)
+        print("Уникальных объектов: ", output_count)
+        print("------------END OF A FRAME --------------\n\n")
+
+
     execution_path = os.getcwd()
     camera = cv2.VideoCapture(0)
     detector = VideoObjectDetection()
@@ -205,12 +215,16 @@ def detect_with_retinanet():
     video_model = detector.detectObjectsFromVideo(camera_input=camera,
                                                   output_file_path=os.path.join(execution_path, "camera_detected_video"),
                                                   frames_per_second=20,
+						  per_frame_function=forFrame,
                                                   log_progress=True,
                                                   minimum_percentage_probability=40)
 
 
 
 
+
+
 #detect_with_mrcnn()
 #detect_with_yolov3()
-#detect_with_retinanet
+#detect_with_yolotiny()
+detect_with_retinanet()
