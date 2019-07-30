@@ -140,7 +140,7 @@ def detect_with_mrcnn():
 
 
 
-def detect_with_yolov3():
+def detect_with_imageai_yolov3():
 
     """
     <-- CODE IF YOU NEED TO LOAD SOME VIDEO -->
@@ -173,7 +173,7 @@ def detect_with_yolov3():
 
 
 
-def detect_with_yolotiny():
+def detect_with_imageai_yolotiny():
     
     execution_path = os.getcwd()
     camera = cv2.VideoCapture(0)
@@ -192,7 +192,7 @@ def detect_with_yolotiny():
 
 
 
-def detect_with_retinanet():
+def detect_with_imageai_retinanet():
 
     
     def forFrame(frame_number, output_array, output_count):
@@ -224,7 +224,7 @@ def detect_with_retinanet():
 
 
 
-#detect_with_mrcnn()
-#detect_with_yolov3()
-#detect_with_yolotiny()
-detect_with_retinanet()
+#detect_with_imageai_mrcnn()
+#detect_with_imageai_yolov3()
+#detect_with_imageai_yolotiny()
+detect_with_imageai_retinanet()
