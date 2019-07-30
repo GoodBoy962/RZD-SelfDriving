@@ -194,13 +194,14 @@ def detect_with_imageai_yolotiny():
 
 def detect_with_imageai_retinanet():
 
-    
     def forFrame(frame_number, output_array, output_count):
         """Детекция bounding box'ов"""
 
         print("ДЛЯ КАДРА " , frame_number)
-        print("Координаты объекта: ", output_array)
-        print("Уникальных объектов: ", output_count)
+        print('Объект:', output_array[0]['name'])
+        print('Вероятность:', output_array[0]['percentage_probability'])
+        print('Bounding box:', output_array[0]['box_points'])
+        print("Уникальных объектов: ", output_count[output_array[0]['name']])
         print("------------END OF A FRAME --------------\n\n")
 
 
@@ -216,11 +217,7 @@ def detect_with_imageai_retinanet():
                                                   output_file_path=os.path.join(execution_path, "camera_detected_video"),
                                                   frames_per_second=20,
 						  per_frame_function=forFrame,
-                                                  log_progress=True,
                                                   minimum_percentage_probability=40)
-
-
-
 
 
 
