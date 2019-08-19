@@ -116,8 +116,8 @@ def cluster_mask_kmeans(skel, show_image=False):
         plt.show()
 
 
-def make_regression(left_rail, right_rail):
-    print(left_rail)
+def make_regression(xs, ys):
+    pass
     # Нужно сделать пары чисел (x, y) для каждого из кластеров
     #reg = linear_model.Ridge(alpha=.5)
     #reg.fit(left_rail)
@@ -137,8 +137,5 @@ if __name__ == '__main__':
 
 
     #cluster_mask_kmeans(skeleton, show_image=True)
-    left_rail, right_rail = cluster_mask_dbscan(skeleton, show_image=True)
-    make_regression(left_rail, right_rail)
-
-
-
+    xs_cl, ys_cl = cluster_mask_dbscan(skeleton, show_image=True)
+    make_regression(xs_cl, ys_cl)
